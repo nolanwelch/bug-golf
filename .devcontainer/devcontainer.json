@@ -1,0 +1,45 @@
+{
+  "name": "Bug Golf",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "ms-vscode.vscode-typescript-next",
+        "visualstudioexptteam.vscodeintellicode",
+        "bradlc.vscode-tailwindcss",
+        "csstools.postcss",
+        "ms-vsliveshare.vsliveshare"
+      ],
+      "settings": {
+        "dev.containers.copyGitConfig": true,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": null,
+        "[javascript]": {
+          "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+        },
+        "[javascriptreact]": {
+          "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+        },
+        "[typescript]": {
+          "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+        },
+        "[typescriptreact]": {
+          "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+        },
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "editor.tabSize": 2
+      }
+    }
+  },
+  "postStartCommand": "./scripts/setup.sh"
+}
