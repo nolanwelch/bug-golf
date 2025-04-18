@@ -1,4 +1,3 @@
-// src/components/ChallengeArea.tsx
 import Editor from "@monaco-editor/react";
 
 function ChallengeArea() {
@@ -7,13 +6,17 @@ function ChallengeArea() {
 }`;
 
   return (
-    <div className="mb-6">
+    <div className="rounded-lg overflow-hidden shadow-md">
       <Editor
-        height="300px"
+        height="320px"
         defaultLanguage="javascript"
         defaultValue={initialCode}
-        theme="vs-dark"
-        options={{ readOnly: false }}
+        theme="vs-light"
+        options={{
+          readOnly: false,
+          fontSize: 14,
+          minimap: { enabled: false },
+        }}
       />
     </div>
   );

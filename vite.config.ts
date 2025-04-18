@@ -5,6 +5,8 @@ import path from "path";
 import { defineConfig } from "vite";
 
 export default defineConfig({
+  root: ".",
+  publicDir: "public",
   plugins: [react(), cloudflare(), tailwindcss()],
   resolve: {
     alias: {

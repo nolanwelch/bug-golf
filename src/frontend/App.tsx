@@ -6,12 +6,14 @@ import Scoreboard from "./components/Scoreboard";
 
 function App() {
   return (
-    <div className="max-w-5xl mx-auto p-6">
-      <Header />
-      <Instructions />
-      <ChallengeArea />
-      <ActionButtons />
-      <Scoreboard />
+    <div className="max-w-4xl mx-auto py-12 px-6">
+      <div className="bg-white rounded-2xl shadow-xl p-8 space-y-8">
+        <Header />
+        <Instructions />
+        <ChallengeArea />
+        <ActionButtons />
+        <Scoreboard />
+      </div>
     </div>
   );
 }
