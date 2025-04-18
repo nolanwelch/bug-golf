@@ -4,7 +4,7 @@
   "account_id": "8bae875f3ce3f27b8a87b1e8f65edebe",
   "workers_dev": false,
   "route": {
-    "pattern": "buggolf.dev/*",
+    "pattern": "buggolf.dev",
     "custom_domain": true
   },
   "main": "./src/worker/index.ts",
