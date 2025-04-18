@@ -1,0 +1,29 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bug-golf",
+  "account_id": "8bae875f3ce3f27b8a87b1e8f65edebe",
+  "workers_dev": false,
+  "route": {
+    "pattern": "buggolf.dev/*",
+    "custom_domain": true
+  },
+  "main": "./src/worker/index.ts",
+  "compatibility_date": "2025-04-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true
+  },
+  "upload_source_maps": true,
+  "assets": {
+    "not_found_handling": "404-page"
+  },
+  "kv_namespaces": [
+    {
+      "binding": "KATAS",
+      "id": "47ebcfaf3dc74c4b8b116fb9658b67e2"
+    }
+  ],
+  "triggers": {
+    "crons": ["0 0 * * *"]
+  }
+}
