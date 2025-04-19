@@ -1,4 +1,4 @@
-# Bug Golf :golf:
+# Bug Golf :space_invader::golf:
 
 A daily minimum‑moves code debugging game that challenges you to fix broken code in as few keystrokes, edits, and as little time as possible. Built with a modern JAMstack:
 
