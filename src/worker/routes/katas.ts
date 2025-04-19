@@ -1,3 +1,4 @@
+import { DEV_KATA } from "@/shared/dev-kata";
 import {
   createKataSchema,
   kataSolutionSchema,
@@ -12,6 +13,11 @@ import { addKata, getKataById, getKataForDate } from "../utils";
 export const katasRouter = new Hono<{ Bindings: Env }>();
 
 katasRouter.get("/today", async (c) => {
+  if (c.env.ENVIRONMENT === "development") {
+    const parsed = publicKataSchema.parse(DEV_KATA);
+    return c.json(parsed);
+  }
+
   const adminKata = await getKataForDate(new Date(), c.env);
   if (!adminKata) {
     return c.json({ success: false }, HttpStatusCodes.NOT_FOUND);
