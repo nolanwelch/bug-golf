@@ -26,3 +26,9 @@ export type CreateKataInput = z.infer<typeof createKataSchema>;
 
 export const updateKataSchema = createKataSchema.partial();
 export type UpdateKataInput = z.infer<typeof updateKataSchema>;
+
+// Solution schema
+export const kataSolutionSchema = z.object({
+  solution: z.string(),
+});
+export type SolveKata = z.infer<typeof kataSolutionSchema>;

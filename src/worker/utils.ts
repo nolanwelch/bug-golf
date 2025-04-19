@@ -1,4 +1,4 @@
-import { Kata } from "@/shared/schema/kata.schema";
+import { AdminKata, adminKataSchema, Kata } from "@/shared/schema/kata.schema";
 
 export function formatDate(d?: Date): string {
   if (typeof d === "undefined") {
@@ -49,4 +49,29 @@ export async function getKataForDate(
   }
   const data = await env.KATAS.get(`kata:${kataId}`);
   return data ? JSON.parse(data) : null;
+}
+
+export async function getKataById(
+  id: string,
+  env: Env
+): Promise<AdminKata | null> {
+  const data = await env.KATAS.get(`kata:${id}`);
+  if (!data) {
+    return null;
+  }
+
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(data);
+  } catch (err) {
+    console.error(`Invalid JSON for kata:${id}`, err);
+    return null;
+  }
+
+  try {
+    return adminKataSchema.parse(parsed);
+  } catch (err) {
+    console.error(`Schema validation failed for kata:${id}`, err);
+    return null;
+  }
 }
