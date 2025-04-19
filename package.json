@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc -b && vite build",
     "deploy": "npm run build && wrangler deploy",
-    "dev": "vite --host",
+    "dev": "CLOUDFLARE_ENV=dev vite --host",
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" --ignore-pattern \"dist/**\"",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "preview": "npm run build && vite preview",
