@@ -23,7 +23,17 @@
       "id": "47ebcfaf3dc74c4b8b116fb9658b67e2"
     }
   ],
+  "vars": {
+    "ENVIRONMENT": "production"
+  },
   "triggers": {
     "crons": ["0 0 * * *"]
+  },
+  "env": {
+    "dev": {
+      "vars": {
+        "ENVIRONMENT": "development"
+      }
+    }
   }
 }
