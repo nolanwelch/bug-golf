@@ -33,7 +33,13 @@
     "dev": {
       "vars": {
         "ENVIRONMENT": "development"
-      }
+      },
+      "kv_namespaces": [
+        {
+          "binding": "KATAS",
+          "id": "73074aebd132437594b089eed97a35c5"
+        }
+      ]
     }
   }
 }
