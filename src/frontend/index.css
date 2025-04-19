@@ -1,3 +1,10 @@
 @import "tailwindcss/preflight";
 @tailwind utilities;
 @import "tailwindcss";
+
+/* page background gradient */
+@layer base {
+  body {
+    @apply bg-gradient-to-tr from-green-200 to-green-50 min-h-screen;
+  }
+}
