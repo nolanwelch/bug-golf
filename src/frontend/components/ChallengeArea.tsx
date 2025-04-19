@@ -8,7 +8,7 @@ function ChallengeArea() {
   return (
     <div className="rounded-lg overflow-hidden shadow-md">
       <Editor
-        height="320px"
+        height="200px"
         defaultLanguage="javascript"
         defaultValue={initialCode}
         theme="vs-light"
