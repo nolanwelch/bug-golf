@@ -16,6 +16,21 @@ function ChallengeArea() {
           readOnly: false,
           fontSize: 14,
           minimap: { enabled: false },
+          // Prevent extra empty space at the bottom
+          scrollBeyondLastLine: false,
+          // Turn off smooth (animated) scrolling
+          smoothScrolling: false,
+
+          // Hide both vertical & horizontal scrollbars
+          scrollbar: {
+            vertical: "hidden",
+            horizontal: "hidden",
+            // don’t steal mouse wheel events
+            alwaysConsumeMouseWheel: false,
+          },
+
+          // Disable all mouse‑wheel scrolling
+          mouseWheelScrollSensitivity: 0,
         }}
       />
     </div>
