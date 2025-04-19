@@ -1,0 +1,7 @@
+app = "bug-golf-sandbox"
+[build]
+  dockerfile = "Dockerfile"
+[env]
+  PORT = "8080"
+[resources]
+  memory_mb = 128
