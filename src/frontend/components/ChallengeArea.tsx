@@ -15,7 +15,14 @@ function ChallengeArea() {
         options={{
           readOnly: false,
           fontSize: 14,
+          wordWrap: "on",
+          folding: false,
+          // Customize editor highlighting
+          renderLineHighlight: "gutter",
+          occurrencesHighlight: "off",
+          matchBrackets: "near",
           minimap: { enabled: false },
+          overviewRulerLanes: 0,
           // Prevent extra empty space at the bottom
           scrollBeyondLastLine: false,
           // Turn off smooth (animated) scrolling
