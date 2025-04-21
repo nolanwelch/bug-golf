@@ -1,4 +1,4 @@
-import { HttpStatusCodes } from "@/shared/constants/http-status-codes.ts";
+import { HttpStatusCodes } from "@/shared/constants";
 import { DEV_KATA } from "@/shared/dev-kata";
 import {
   createKataSchema,
