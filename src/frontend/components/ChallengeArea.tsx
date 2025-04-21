@@ -29,7 +29,7 @@ function ChallengeArea({ kataId }: ChallengeAreaProps) {
           throw new Error(`Status ${resp.status}`);
         }
         const data = await resp.json();
-        const parsed = publicKataSchema.safeParse(data);
+        const parsed = publicKataSchema.safeParse(data.kata);
         if (!parsed.success) {
           console.error(`Kata parse error: ${parsed.error}`);
           throw new Error("Invalid kata payload");
