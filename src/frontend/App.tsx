@@ -1,23 +1,15 @@
-import { useParams } from "react-router-dom";
-import ActionButtons from "./components/ActionButtons";
-import ChallengeArea from "./components/ChallengeArea";
-import Header from "./components/Header";
-import Scoreboard from "./components/Scoreboard";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AdminPage from "./pages/AdminPage";
+import HomePage from "./pages/HomePage";
 
-function App() {
-  const { id } = useParams<{ id?: string }>();
-  const kataId = id ?? "today";
-
+export default function App() {
   return (
-    <div className="max-w-4xl mx-auto py-12 px-6">
-      <div className="bg-white rounded-2xl shadow-xl p-8 space-y-8">
-        <Header />
-        <ChallengeArea kataId={kataId} />
-        <ActionButtons />
-        <Scoreboard />
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/:id" element={<HomePage />} />
+        <Route path="/admin" element={<AdminPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;
