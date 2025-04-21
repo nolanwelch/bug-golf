@@ -3,6 +3,10 @@ import { createClerkClient } from "@clerk/backend";
 import { getAuth } from "@hono/clerk-auth";
 import { createMiddleware } from "hono/factory";
 
+const authClient = createClerkClient({
+  secretKey: import.meta.env.VITE_CLERK_SECRET_KEY,
+});
+
 /**
  * Middleware that enforces authentication using Clerk.
  *
@@ -54,7 +58,7 @@ export function requireRole(
     await enforceAuth(c, async () => {});
 
     const auth = getAuth(c)!;
-    const user = await createClerkClient({}).users.getUser(auth.userId!);
+    const user = await authClient.users.getUser(auth.userId!);
 
     const publicRoles = Array.isArray(user.publicMetadata.roles)
       ? user.publicMetadata.roles
