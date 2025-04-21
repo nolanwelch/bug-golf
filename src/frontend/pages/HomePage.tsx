@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
-import ActionButtons from "../components/ActionButtons.tsx";
-import ChallengeArea from "../components/ChallengeArea.tsx";
-import Header from "../components/Header.tsx";
-import Scoreboard from "../components/Scoreboard.tsx";
+import ActionButtons from "../components/ActionButtons";
+import ChallengeArea from "../components/ChallengeArea";
+import Header from "../components/Header";
+import Scoreboard from "../components/Scoreboard";
 
 export default function HomePage() {
   const { id } = useParams<{ id?: string }>();

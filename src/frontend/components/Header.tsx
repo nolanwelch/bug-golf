@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import Instructions from "./Instructions.tsx";
+import Instructions from "./Instructions";
 
 export default function Header() {
   const [showHelp, setShowHelp] = useState(false);

@@ -1,14 +1,14 @@
-import { DEV_KATA } from "@/shared/dev-kata.ts";
+import { DEV_KATA } from "@/shared/dev-kata";
 import {
   createKataSchema,
   kataSolutionSchema,
   publicKataSchema,
-} from "@/shared/schema/kata.schema.ts";
+} from "@/shared/schema/kata.schema";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
 import * as HttpStatusCodes from "stoker/http-status-codes";
 import { v4 as uuidv4 } from "uuid";
-import { addKata, getKataById, getKataForDate } from "../utils.ts";
+import { addKata, getKataById, getKataForDate } from "../utils";
 
 export const katasRouter = new Hono<{ Bindings: Env }>();
 
