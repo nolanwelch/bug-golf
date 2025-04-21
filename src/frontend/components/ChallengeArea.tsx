@@ -1,4 +1,4 @@
-import { PublicKata, publicKataSchema } from "@/shared/schema/kata.schema";
+import { Kata, kataSchema } from "@/shared/schema/kata.schema";
 import { Editor } from "@monaco-editor/react";
 import { useEffect, useState } from "react";
 
@@ -7,7 +7,7 @@ export interface ChallengeAreaProps {
 }
 
 function ChallengeArea({ kataId }: ChallengeAreaProps) {
-  const [kata, setKata] = useState<PublicKata | null>(null);
+  const [kata, setKata] = useState<Kata | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -29,7 +29,7 @@ function ChallengeArea({ kataId }: ChallengeAreaProps) {
           throw new Error(`Status ${resp.status}`);
         }
         const data = await resp.json();
-        const parsed = publicKataSchema.safeParse(data.kata);
+        const parsed = kataSchema.safeParse(data.kata);
         if (!parsed.success) {
           console.error(`Kata parse error: ${parsed.error}`);
           throw new Error("Invalid kata payload");
