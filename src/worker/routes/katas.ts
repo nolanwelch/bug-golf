@@ -16,7 +16,7 @@ export const katasRouter = new Hono<{ Bindings: Env }>();
 katasRouter.get("/today", async (c) => {
   if (c.env.ENVIRONMENT === "development") {
     const parsed = publicKataSchema.parse(DEV_KATA);
-    return c.json(parsed);
+    return c.json({ success: true, kata: parsed });
   }
 
   const adminKata = await getKataForDate(new Date(), c.env);
