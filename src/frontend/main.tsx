@@ -3,8 +3,8 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./index.css";
-import AdminPage from "./pages/AdminPage";
-import HomePage from "./pages/HomePage";
+import AdminPage from "./pages/AdminPage.tsx";
+import HomePage from "./pages/HomePage.tsx";
 
 const CLERK_PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 

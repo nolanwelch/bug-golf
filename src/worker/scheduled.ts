@@ -1,4 +1,4 @@
-import { assignRandomKataForToday, formatDate } from "./utils";
+import { assignRandomKataForToday, formatDate } from "./utils.ts";
 
 export default {
   async scheduled(_event: ScheduledEvent, env: Env) {

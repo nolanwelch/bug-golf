@@ -1,5 +1,5 @@
-import { PublicKata, publicKataSchema } from "@/shared/schema/kata.schema";
-import Editor from "@monaco-editor/react";
+import { PublicKata, publicKataSchema } from "@/shared/schema/kata.schema.ts";
+import { Editor } from "@monaco-editor/react";
 import { useEffect, useState } from "react";
 
 export interface ChallengeAreaProps {

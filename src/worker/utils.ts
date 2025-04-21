@@ -1,4 +1,8 @@
-import { AdminKata, adminKataSchema, Kata } from "@/shared/schema/kata.schema";
+import {
+  AdminKata,
+  adminKataSchema,
+  Kata,
+} from "@/shared/schema/kata.schema.ts";
 
 export function formatDate(d?: Date): string {
   if (typeof d === "undefined") {

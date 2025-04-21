@@ -1,4 +1,4 @@
-import { PublicKata } from "./schema/kata.schema";
+import { PublicKata } from "./schema/kata.schema.ts";
 
 export const DEV_KATA: PublicKata = {
   starterCode: `// Write a function that returns the sum of two numbers\nfunction add(a, b) {\n  return a - b;\n}`,

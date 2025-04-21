@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { katasRouter } from "./routes/katas";
+import { katasRouter } from "./routes/katas.ts";
 
 const apiRouter = new Hono<{ Bindings: Env }>();
 
