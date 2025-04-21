@@ -3,7 +3,7 @@ import { Editor } from "@monaco-editor/react";
 import { useEffect, useState } from "react";
 
 export interface ChallengeAreaProps {
-  kataId: string;
+  kataId?: string;
 }
 
 function ChallengeArea({ kataId }: ChallengeAreaProps) {
@@ -16,6 +16,11 @@ function ChallengeArea({ kataId }: ChallengeAreaProps) {
     setKata(null);
     setError(null);
     setLoading(true);
+
+    if (!kataId) {
+      setLoading(false);
+      return;
+    }
 
     (async () => {
       try {
@@ -55,7 +60,7 @@ function ChallengeArea({ kataId }: ChallengeAreaProps) {
     );
   }
 
-  if (!kata) {
+  if (kataId && !kata) {
     return (
       <div className="max-w-4xl mx-auto py-12 px-6 text-gray-500 text-center">
         No kata assigned for today.
@@ -63,13 +68,15 @@ function ChallengeArea({ kataId }: ChallengeAreaProps) {
     );
   }
 
+  const starterCode = kata ? kata.starterCode : "";
+
   return (
     <div className="rounded-lg overflow-hidden shadow-md">
       <Editor
         height="200px"
         defaultLanguage="javascript"
         loading=""
-        defaultValue={kata!.starterCode}
+        defaultValue={starterCode}
         theme="vs-light"
         options={{
           readOnly: false,
