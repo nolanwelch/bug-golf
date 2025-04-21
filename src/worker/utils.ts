@@ -1,4 +1,4 @@
-import { AdminKata, adminKataSchema, Kata } from "@/shared/schema/kata.schema";
+import { Kata, kataSchema } from "@/shared/schema/kata.schema";
 
 export function formatDate(d?: Date): string {
   if (typeof d === "undefined") {
@@ -51,10 +51,7 @@ export async function getKataForDate(
   return data ? JSON.parse(data) : null;
 }
 
-export async function getKataById(
-  id: string,
-  env: Env
-): Promise<AdminKata | null> {
+export async function getKataById(id: string, env: Env): Promise<Kata | null> {
   const data = await env.KATAS.get(`kata:${id}`);
   if (!data) {
     return null;
@@ -69,7 +66,7 @@ export async function getKataById(
   }
 
   try {
-    return adminKataSchema.parse(parsed);
+    return kataSchema.parse(parsed);
   } catch (err) {
     console.error(`Schema validation failed for kata:${id}`, err);
     return null;
