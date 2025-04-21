@@ -1,3 +1,4 @@
+import { HttpStatusCodes } from "@/shared/constants/http-status-codes.ts";
 import { DEV_KATA } from "@/shared/dev-kata";
 import {
   createKataSchema,
@@ -6,7 +7,6 @@ import {
 } from "@/shared/schema/kata.schema";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
-import * as HttpStatusCodes from "stoker/http-status-codes";
 import { v4 as uuidv4 } from "uuid";
 import { addKata, getKataById, getKataForDate } from "../utils";
 
