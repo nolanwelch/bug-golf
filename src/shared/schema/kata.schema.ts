@@ -1,34 +1,26 @@
-import { z } from "zod";
+import { z } from "@hono/zod-openapi";
 
-// Base schema
-export const kataSchema = z.object({
-  starterCode: z.string(),
-  description: z.string().optional(),
-  testCode: z.string(),
-});
+// Test case schema
+export const testCaseSchema = z
+  .object({
+    args: z.array(z.any()),
+    expected: z.any(),
+  })
+  .openapi("TestCase");
+export type TestCase = z.infer<typeof testCaseSchema>;
+
+// Kata schema
+export const kataSchema = z
+  .object({
+    starterCode: z.string().nonempty(),
+    testCases: z.array(testCaseSchema),
+    description: z.string().optional(),
+  })
+  .openapi("Kata");
 export type Kata = z.infer<typeof kataSchema>;
 
-// Public schema
-export const publicKataSchema = kataSchema.omit({ testCode: true });
-export type PublicKata = z.infer<typeof publicKataSchema>;
-
-// Admin schema
-export const adminKataSchema = kataSchema;
-export type AdminKata = z.infer<typeof adminKataSchema>;
-
-// Create / Update objects
-export const createKataSchema = kataSchema.pick({
-  starterCode: true,
-  description: true,
-  testCode: true,
-});
-export type CreateKataInput = z.infer<typeof createKataSchema>;
-
-export const updateKataSchema = createKataSchema.partial();
-export type UpdateKataInput = z.infer<typeof updateKataSchema>;
-
 // Solution schema
-export const kataSolutionSchema = z.object({
-  solution: z.string(),
-});
-export type SolveKata = z.infer<typeof kataSolutionSchema>;
+export const solutionSchema = z
+  .object({ code: z.string().nonempty() })
+  .openapi("Solution");
+export type Solution = z.infer<typeof solutionSchema>;

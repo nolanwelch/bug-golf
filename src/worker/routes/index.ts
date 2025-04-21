@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { katasRouter } from "./katas.ts";
+import { katasHandler } from "./katas.handlers.ts";
 
 /**
  * Registers all API route groups on the provided router.
@@ -11,5 +11,5 @@ import { katasRouter } from "./katas.ts";
  * @param router - The main API router to attach subroutes to.
  */
 export function mountRoutes(router: Hono<{ Bindings: Env }>) {
-  router.route("/katas", katasRouter);
+  router.route("/katas", katasHandler);
 }
