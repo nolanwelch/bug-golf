@@ -25,5 +25,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src/frontend"]
+  "include": ["src/frontend", "src/shared"]
 }

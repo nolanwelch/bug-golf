@@ -1,9 +1,11 @@
 import { Hono } from "hono";
-import { katasRouter } from "./routes/katas";
+import { applyMiddleware } from "./middleware";
+import { mountRoutes } from "./routes";
 
 const apiRouter = new Hono<{ Bindings: Env }>();
 
-apiRouter.route("/katas", katasRouter);
+applyMiddleware(apiRouter);
+mountRoutes(apiRouter);
 
 const app = new Hono<{ Bindings: Env }>();
 app.route("/api", apiRouter);

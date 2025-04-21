@@ -1,3 +1,4 @@
+import { HttpStatusCodes } from "@/shared/constants";
 import { DEV_KATA } from "@/shared/dev-kata";
 import {
   createKataSchema,
@@ -6,8 +7,8 @@ import {
 } from "@/shared/schema/kata.schema";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
-import * as HttpStatusCodes from "stoker/http-status-codes";
 import { v4 as uuidv4 } from "uuid";
+import { enforceAdmin } from "../middleware/auth";
 import { addKata, getKataById, getKataForDate } from "../utils";
 
 export const katasRouter = new Hono<{ Bindings: Env }>();
@@ -71,16 +72,19 @@ katasRouter.post(
   }
 );
 
-katasRouter.post("/", zValidator("json", createKataSchema), async (c) => {
-  return c.json({ success: false }, HttpStatusCodes.UNAUTHORIZED);
-  // TODO: Add auth to kata POST route
-  try {
-    const data = c.req.valid("json");
-    const id = uuidv4();
-    console.log(data);
-    await addKata(id, data, c.env);
-    return c.json({ success: true, id }, HttpStatusCodes.CREATED);
-  } catch (err) {
-    console.error(err);
+katasRouter.post(
+  "/",
+  enforceAdmin,
+  zValidator("json", createKataSchema),
+  async (c) => {
+    try {
+      const data = c.req.valid("json");
+      const id = uuidv4();
+      console.log(data);
+      await addKata(id, data, c.env);
+      return c.json({ success: true, id }, HttpStatusCodes.CREATED);
+    } catch (err) {
+      console.error(err);
+    }
   }
-});
+);

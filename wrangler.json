@@ -27,7 +27,8 @@
     }
   ],
   "vars": {
-    "ENVIRONMENT": "production"
+    "ENVIRONMENT": "production",
+    "CLERK_PUBLISHABLE_KEY": "pk_live_Y2xlcmsuYnVnZ29sZi5kZXYk"
   },
   "triggers": {
     "crons": ["0 0 * * *"]
@@ -35,7 +36,8 @@
   "env": {
     "dev": {
       "vars": {
-        "ENVIRONMENT": "development"
+        "ENVIRONMENT": "development",
+        "CLERK_PUBLISHABLE_KEY": "pk_test_dG91Z2gtYnV6emFyZC04Ni5jbGVyay5hY2NvdW50cy5kZXYk"
       },
       "kv_namespaces": [
         {

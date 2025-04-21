@@ -1,9 +1,9 @@
 import { PublicKata, publicKataSchema } from "@/shared/schema/kata.schema";
-import Editor from "@monaco-editor/react";
+import { Editor } from "@monaco-editor/react";
 import { useEffect, useState } from "react";
 
 export interface ChallengeAreaProps {
-  kataId: string;
+  kataId?: string;
 }
 
 function ChallengeArea({ kataId }: ChallengeAreaProps) {
@@ -17,6 +17,11 @@ function ChallengeArea({ kataId }: ChallengeAreaProps) {
     setError(null);
     setLoading(true);
 
+    if (!kataId) {
+      setLoading(false);
+      return;
+    }
+
     (async () => {
       try {
         const resp = await fetch(`/api/katas/${kataId}`);
@@ -24,7 +29,7 @@ function ChallengeArea({ kataId }: ChallengeAreaProps) {
           throw new Error(`Status ${resp.status}`);
         }
         const data = await resp.json();
-        const parsed = publicKataSchema.safeParse(data);
+        const parsed = publicKataSchema.safeParse(data.kata);
         if (!parsed.success) {
           console.error(`Kata parse error: ${parsed.error}`);
           throw new Error("Invalid kata payload");
@@ -55,7 +60,7 @@ function ChallengeArea({ kataId }: ChallengeAreaProps) {
     );
   }
 
-  if (!kata) {
+  if (kataId && !kata) {
     return (
       <div className="max-w-4xl mx-auto py-12 px-6 text-gray-500 text-center">
         No kata assigned for today.
@@ -63,13 +68,15 @@ function ChallengeArea({ kataId }: ChallengeAreaProps) {
     );
   }
 
+  const starterCode = kata ? kata.starterCode : "";
+
   return (
     <div className="rounded-lg overflow-hidden shadow-md">
       <Editor
         height="200px"
         defaultLanguage="javascript"
         loading=""
-        defaultValue={kata!.starterCode}
+        defaultValue={starterCode}
         theme="vs-light"
         options={{
           readOnly: false,

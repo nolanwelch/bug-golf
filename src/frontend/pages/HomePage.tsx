@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
-import ActionButtons from "./components/ActionButtons";
-import ChallengeArea from "./components/ChallengeArea";
-import Header from "./components/Header";
-import Scoreboard from "./components/Scoreboard";
+import ActionButtons from "../components/ActionButtons";
+import ChallengeArea from "../components/ChallengeArea";
+import Header from "../components/Header";
+import Scoreboard from "../components/Scoreboard";
 
-function App() {
+export default function HomePage() {
   const { id } = useParams<{ id?: string }>();
   const kataId = id ?? "today";
 
@@ -19,5 +19,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
