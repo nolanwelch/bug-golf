@@ -15,6 +15,10 @@ function Instructions() {
           <b>Fastest Solution</b>: Beat the clock.
         </li>
       </ul>
+      <div className="text-center mt-5">
+        <p>🚧 This site is a work in progress! 🚧</p>
+        <p>Come back soon to play Bug Golf.</p>
+      </div>
     </section>
   );
 }
