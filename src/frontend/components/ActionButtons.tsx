@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export interface SubmitButtonProps {
   onClick: () => void;
 }
@@ -28,11 +30,33 @@ function ResetButton({ onClick }: ResetButtonProps) {
   );
 }
 
-function ActionButtons() {
+export interface ActionButtonsProps {
+  submitted: boolean;
+  setSubmitted: Dispatch<SetStateAction<boolean>>;
+  setReset: Dispatch<SetStateAction<boolean>>;
+}
+
+function ActionButtons({
+  submitted,
+  setSubmitted,
+  setReset,
+}: ActionButtonsProps) {
+  if (submitted) {
+    return null;
+  }
+
   return (
     <div className="flex justify-center gap-4">
-      <ResetButton onClick={() => {}} />
-      <SubmitButton onClick={() => {}} />
+      <ResetButton
+        onClick={() => {
+          setReset(true);
+        }}
+      />
+      <SubmitButton
+        onClick={() => {
+          setSubmitted(true);
+        }}
+      />
     </div>
   );
 }

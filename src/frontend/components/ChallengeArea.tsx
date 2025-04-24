@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 
 export interface ChallengeAreaProps {
   kataId?: string;
+  resetKey: number;
 }
 
-function ChallengeArea({ kataId }: ChallengeAreaProps) {
+function ChallengeArea({ kataId, resetKey }: ChallengeAreaProps) {
   const [kata, setKata] = useState<Kata | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -41,7 +42,7 @@ function ChallengeArea({ kataId }: ChallengeAreaProps) {
         setLoading(false);
       }
     })();
-  }, [kataId]);
+  }, [kataId, resetKey]);
 
   if (loading) {
     return (
@@ -71,7 +72,7 @@ function ChallengeArea({ kataId }: ChallengeAreaProps) {
   const starterCode = kata ? kata.starterCode : "";
 
   return (
-    <div className="rounded-lg overflow-hidden shadow-md">
+    <div className="rounded-lg overflow-hidden shadow-md" autoFocus={true}>
       <Editor
         height="200px"
         defaultLanguage="javascript"
