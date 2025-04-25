@@ -1,13 +1,22 @@
 import { Kata, kataSchema } from "@/shared/schema/kata.schema";
 import { Editor } from "@monaco-editor/react";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 export interface ChallengeAreaProps {
   kataId?: string;
   resetKey: number;
+  setKeystrokeCount: Dispatch<SetStateAction<number>>;
+  setOriginalCode: Dispatch<SetStateAction<string>>;
+  setUserCode: Dispatch<SetStateAction<string>>;
 }
 
-function ChallengeArea({ kataId, resetKey }: ChallengeAreaProps) {
+function ChallengeArea({
+  kataId,
+  resetKey,
+  setKeystrokeCount,
+  setOriginalCode,
+  setUserCode,
+}: ChallengeAreaProps) {
   const [kata, setKata] = useState<Kata | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -70,10 +79,25 @@ function ChallengeArea({ kataId, resetKey }: ChallengeAreaProps) {
   }
 
   const starterCode = kata ? kata.starterCode : "";
+  setOriginalCode(starterCode);
+  setUserCode(starterCode);
 
   return (
-    <div className="rounded-lg overflow-hidden shadow-md" autoFocus={true}>
+    <div
+      className="rounded-lg overflow-hidden shadow-md"
+      tabIndex={0}
+      autoFocus={true}
+      // Count keystrokes
+      onKeyDown={() => {
+        setKeystrokeCount((prev) => prev + 1);
+      }}
+    >
       <Editor
+        // Capture user code
+        onChange={(code) => {
+          setUserCode(code ?? "");
+        }}
+        // Configure appearance
         height="200px"
         defaultLanguage="javascript"
         loading=""
