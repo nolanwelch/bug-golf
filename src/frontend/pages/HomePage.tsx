@@ -146,11 +146,19 @@ export default function HomePage() {
           setOriginalCode={setOriginalCode}
           userCodeState={[userCode, setUserCode]}
         />
+        {/* Description */}
+        <div className="space-y-4">
+          <p className="text-lg leading-relaxed text-gray-700 whitespace-pre-line">
+            <span className="font-semibold">Challenge description: </span>
+            {kata?.description}
+          </p>
+        </div>
         <ActionButtons
           setReset={setReset}
           submitted={submitted}
           setSubmitted={setSubmitted}
         />
+        <hr className="border-t border-gray-300" />
         {failures.length > 0 && <TestCaseErrors failures={failures} />}
         <Scoreboard
           submitted={submitted}
