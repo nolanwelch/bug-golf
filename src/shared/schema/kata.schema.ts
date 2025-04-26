@@ -9,6 +9,16 @@ export const testCaseSchema = z
   .openapi("TestCase");
 export type TestCase = z.infer<typeof testCaseSchema>;
 
+export const testCaseResultSchema = z
+  .object({
+    pass: z.boolean().optional(),
+    input: z.array(z.any()),
+    expectedOutput: z.any(),
+    actualOutput: z.any(),
+  })
+  .openapi("TestCaseResult");
+export type TestCaseResult = z.infer<typeof testCaseResultSchema>;
+
 // Kata schema
 export const kataSchema = z
   .object({
