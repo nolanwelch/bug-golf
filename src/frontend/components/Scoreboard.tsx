@@ -1,12 +1,12 @@
-import { calculateScore } from "@/shared/utils/scoring";
-
 export interface ScoreboardProps {
+  score: number;
   submitted: boolean;
   keystrokeCount: number;
   editDistance: number;
 }
 
 function Scoreboard({
+  score,
   submitted,
   keystrokeCount,
   editDistance,
@@ -42,7 +42,7 @@ function Scoreboard({
       {submitted ? (
         <h2 className="text-center text-xl">
           <span className="font-semibold">Score: </span>
-          {calculateScore(keystrokeCount, editDistance)}
+          {score}
         </h2>
       ) : (
         <></>

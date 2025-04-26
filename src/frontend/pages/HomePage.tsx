@@ -1,5 +1,5 @@
 import { Kata, kataSchema, TestCaseResult } from "@/shared/schema/kata.schema";
-import { evaluateCode } from "@/shared/utils/scoring";
+import { calculateScore, evaluateCode } from "@/shared/utils/scoring";
 import { distance } from "fastest-levenshtein";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -7,11 +7,14 @@ import ActionButtons from "../components/ActionButtons";
 import ChallengeArea from "../components/ChallengeArea";
 import Header from "../components/Header";
 import Scoreboard from "../components/Scoreboard";
+import SolutionSummary from "../components/SolutionSummary";
 import TestCaseErrors from "../components/TestCaseErrors";
 
 export default function HomePage() {
   const [reset, setReset] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [accepted, setAccepted] = useState(false);
+  const [score, setScore] = useState<number | null>(null);
   const [keystrokeCount, setKeystrokeCount] = useState(0);
   const [editDistance, setEditDistance] = useState(0);
   const [originalCode, setOriginalCode] = useState("");
@@ -66,6 +69,8 @@ export default function HomePage() {
       if (allPassed) {
         console.log("All test cases passed! Accepting solution.");
         setFailures([]);
+        setAccepted(true);
+        setScore(calculateScore(keystrokeCount, editDistance));
       } else {
         console.log(
           "Some test cases failed:",
@@ -82,6 +87,7 @@ export default function HomePage() {
       <div className="bg-white rounded-2xl shadow-xl p-8 space-y-8">
         <Header />
         <ChallengeArea
+          accepted={accepted}
           submitted={submitted}
           kata={kata}
           setKeystrokeCount={setKeystrokeCount}
@@ -98,7 +104,15 @@ export default function HomePage() {
           submitted={submitted}
           keystrokeCount={keystrokeCount}
           editDistance={editDistance}
+          score={score ?? -1}
         />
+        {accepted && (
+          <SolutionSummary
+            score={score ?? -1}
+            keystrokeCount={keystrokeCount}
+            editDistance={editDistance}
+          />
+        )}
       </div>
     </div>
   );
