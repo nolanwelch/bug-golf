@@ -2,10 +2,11 @@ import { TestCase, TestCaseResult } from "../schema/kata.schema";
 
 export function calculateScore(
   keystrokes: number,
-  editDistance: number
+  editDistance: number,
+  timeTaken: number
 ): number {
   // Unweighted sum for now; will want to add weighting later
-  return keystrokes + editDistance;
+  return keystrokes + editDistance + timeTaken;
 }
 
 export function evaluateCode(

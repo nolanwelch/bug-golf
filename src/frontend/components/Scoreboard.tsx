@@ -1,8 +1,11 @@
+import { formatTime } from "@/shared/utils/format";
+
 export interface ScoreboardProps {
   score: number;
   submitted: boolean;
   keystrokeCount: number;
   editDistance: number;
+  timeTaken: number;
 }
 
 function Scoreboard({
@@ -10,7 +13,19 @@ function Scoreboard({
   submitted,
   keystrokeCount,
   editDistance,
+  timeTaken,
 }: ScoreboardProps) {
+  let timeString = formatTime(timeTaken);
+  if (timeTaken < 10) {
+    timeString += " 👑";
+  } else if (timeTaken < 30) {
+    timeString += " 🚀";
+  } else if (timeTaken < 60) {
+    timeString += " 🔥";
+  } else if (timeTaken > 5 * 60) {
+    timeString += " 💤";
+  }
+
   const stats = [
     {
       label: "Keystrokes",
@@ -22,7 +37,11 @@ function Scoreboard({
       value: submitted ? editDistance : "--",
       icon: "✂️",
     },
-    { label: "Time Taken", value: "--", icon: "⏱️" },
+    {
+      label: "Time Taken",
+      value: submitted ? timeString : "--",
+      icon: "⏱️",
+    },
   ];
 
   return (

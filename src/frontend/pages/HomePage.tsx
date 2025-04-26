@@ -17,6 +17,8 @@ export default function HomePage() {
   const [score, setScore] = useState<number | null>(null);
   const [keystrokeCount, setKeystrokeCount] = useState(0);
   const [editDistance, setEditDistance] = useState(0);
+  const [timeTaken, setTimeTaken] = useState<number>(0);
+  const [intervalId, setIntervalId] = useState<NodeJS.Timeout | null>(null);
   const [originalCode, setOriginalCode] = useState("");
   const [userCode, setUserCode] = useState("");
   const [kata, setKata] = useState<Kata | null>(null);
@@ -46,16 +48,43 @@ export default function HomePage() {
     })();
   }, [kataId]);
 
-  // Handle submit and reset state
+  // Start timer on Kata load
+  useEffect(() => {
+    if (kata) {
+      setKeystrokeCount(0);
+      setFailures([]);
+      setAccepted(false);
+      setScore(null);
+      setTimeTaken(0);
+
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+      const start = Date.now();
+      const newInterval = setInterval(() => {
+        setTimeTaken(Math.floor((Date.now() - start) / 1000));
+      }, 1000);
+      setIntervalId(newInterval);
+    }
+  }, [kata]);
+
+  // Handle reset state
   useEffect(() => {
     if (reset) {
       setReset(false);
       setKeystrokeCount(0);
       setFailures([]);
+      setAccepted(false);
+      setScore(null);
+      setTimeTaken(0);
     }
+  }, [reset]);
+
+  // Handle submit state
+  useEffect(() => {
     if (submitted) {
-      const editDistance = distance(originalCode, userCode);
-      setEditDistance(editDistance);
+      const editDistanceResult = distance(originalCode, userCode);
+      setEditDistance(editDistanceResult);
 
       const results = evaluateCode(userCode, kata ? kata.testCases : []);
 
@@ -70,7 +99,12 @@ export default function HomePage() {
         console.log("All test cases passed! Accepting solution.");
         setFailures([]);
         setAccepted(true);
-        setScore(calculateScore(keystrokeCount, editDistance));
+        setScore(calculateScore(keystrokeCount, editDistance, timeTaken));
+
+        // Stop timer
+        if (intervalId) {
+          clearInterval(intervalId);
+        }
       } else {
         console.log(
           "Some test cases failed:",
@@ -80,7 +114,25 @@ export default function HomePage() {
         setSubmitted(false);
       }
     }
-  }, [reset, submitted, originalCode, userCode, kata, kataId]);
+  }, [
+    submitted,
+    userCode,
+    originalCode,
+    kata,
+    intervalId,
+    keystrokeCount,
+    editDistance,
+    timeTaken,
+  ]);
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
+  }, [intervalId]);
 
   return (
     <div className="max-w-4xl mx-auto py-12 px-6">
@@ -104,6 +156,7 @@ export default function HomePage() {
           submitted={submitted}
           keystrokeCount={keystrokeCount}
           editDistance={editDistance}
+          timeTaken={timeTaken}
           score={score ?? -1}
         />
         {accepted && (
@@ -111,6 +164,7 @@ export default function HomePage() {
             score={score ?? -1}
             keystrokeCount={keystrokeCount}
             editDistance={editDistance}
+            timeTaken={timeTaken}
           />
         )}
       </div>
