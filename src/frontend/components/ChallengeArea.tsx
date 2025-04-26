@@ -88,7 +88,7 @@ function ChallengeArea({
       tabIndex={0}
       autoFocus={true}
       // Count keystrokes
-      onKeyDown={() => {
+      onKeyDownCapture={() => {
         setKeystrokeCount((prev) => prev + 1);
       }}
     >
