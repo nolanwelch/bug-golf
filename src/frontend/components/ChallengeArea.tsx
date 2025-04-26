@@ -1,86 +1,38 @@
-import { Kata, kataSchema } from "@/shared/schema/kata.schema";
+import { Kata } from "@/shared/schema/kata.schema";
 import { Editor } from "@monaco-editor/react";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 
 export interface ChallengeAreaProps {
-  kataId?: string;
-  resetKey: number;
+  submitted: boolean;
+  kata: Kata | null;
   setKeystrokeCount: Dispatch<SetStateAction<number>>;
   setOriginalCode: Dispatch<SetStateAction<string>>;
-  setUserCode: Dispatch<SetStateAction<string>>;
+  userCodeState: [string, Dispatch<SetStateAction<string>>];
 }
 
 function ChallengeArea({
-  kataId,
-  resetKey,
+  submitted,
+  kata,
   setKeystrokeCount,
   setOriginalCode,
-  setUserCode,
+  userCodeState,
 }: ChallengeAreaProps) {
-  const [kata, setKata] = useState<Kata | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [userCode, setUserCode] = userCodeState;
 
   useEffect(() => {
-    // Reset state
-    setKata(null);
-    setError(null);
-    setLoading(true);
-
-    if (!kataId) {
-      setLoading(false);
-      return;
+    if (kata) {
+      setOriginalCode(kata.starterCode);
+      setUserCode(kata.starterCode);
     }
+  }, [kata, setOriginalCode, setUserCode]);
 
-    (async () => {
-      try {
-        const resp = await fetch(`/api/katas/${kataId}`);
-        if (!resp.ok) {
-          throw new Error(`Status ${resp.status}`);
-        }
-        const data = await resp.json();
-        const parsed = kataSchema.safeParse(data.kata);
-        if (!parsed.success) {
-          console.error(`Kata parse error: ${parsed.error}`);
-          throw new Error("Invalid kata payload");
-        }
-        setKata(parsed.data);
-      } catch (err) {
-        setError(err as string);
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, [kataId, resetKey]);
-
-  if (loading) {
-    return (
-      <div
-        className="max-w-4xl mx-auto py-12 px-6 text-center"
-        style={{ height: "200px" }}
-      />
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="max-w-4xl mx-auto py-12 px-6 text-red-500 text-center">
-        Error: {error}
-      </div>
-    );
-  }
-
-  if (kataId && !kata) {
+  if (!kata) {
     return (
       <div className="max-w-4xl mx-auto py-12 px-6 text-gray-500 text-center">
         No kata assigned for today.
       </div>
     );
   }
-
-  const starterCode = kata ? kata.starterCode : "";
-  setOriginalCode(starterCode);
-  setUserCode(starterCode);
 
   return (
     <div
@@ -89,19 +41,21 @@ function ChallengeArea({
       autoFocus={true}
       // Count keystrokes
       onKeyDownCapture={() => {
+        if (submitted) return;
         setKeystrokeCount((prev) => prev + 1);
       }}
     >
       <Editor
+        value={userCode}
         // Capture user code
         onChange={(code) => {
+          if (submitted) return;
           setUserCode(code ?? "");
         }}
         // Configure appearance
         height="200px"
         defaultLanguage="javascript"
         loading=""
-        defaultValue={starterCode}
         theme="vs-light"
         options={{
           readOnly: false,
