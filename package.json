@@ -7,7 +7,7 @@
     "build": "tsc -b && vite build",
     "deploy": "npm run build && wrangler deploy",
     "dev": "CLOUDFLARE_ENV=dev vite --host",
-    "lint": "eslint \"**/*.{js,jsx,ts,tsx}\" --ignore-pattern \"dist/**\"",
+    "lint": "eslint --fix \"**/*.{js,jsx,ts,tsx}\" --ignore-pattern \"dist/**\"",
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "preview": "npm run build && vite preview",
     "types": "wrangler types",
