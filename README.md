@@ -1,5 +1,7 @@
 # Bug Golf :space_invader::golf:
 
+[![pre-commit.ci status](https://results.pre-commit.ci/badge/github/nolanwelch/bug-golf/main.svg)](https://results.pre-commit.ci/latest/github/nolanwelch/bug-golf/main)
+
 A daily minimum‑moves code debugging game that challenges you to fix broken code in as few keystrokes, edits, and as little time as possible. Built with a modern JAMstack:
 
 - **Frontend:** React, Vite, Tailwind CSS, Monaco Editor
