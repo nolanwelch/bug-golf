@@ -22,10 +22,11 @@
     "not_found_handling": "single-page-application",
     "directory": "./public"
   },
-  "kv_namespaces": [
+  "d1_databases": [
     {
-      "binding": "KATAS",
-      "id": "47ebcfaf3dc74c4b8b116fb9658b67e2"
+      "binding": "DB",
+      "database_name": "buggolf-db",
+      "database_id": "2eb992b7-bf45-44c4-91d4-4b62e7c78c9c"
     }
   ],
   "vars": {
