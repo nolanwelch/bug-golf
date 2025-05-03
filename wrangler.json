@@ -41,13 +41,7 @@
       "vars": {
         "ENVIRONMENT": "development",
         "CLERK_PUBLISHABLE_KEY": "pk_test_dG91Z2gtYnV6emFyZC04Ni5jbGVyay5hY2NvdW50cy5kZXYk"
-      },
-      "kv_namespaces": [
-        {
-          "binding": "KATAS",
-          "id": "73074aebd132437594b089eed97a35c5"
-        }
-      ]
+      }
     }
   }
 }
