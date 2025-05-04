@@ -2,7 +2,7 @@
 set -e
 
 # Install dependencies
-npm install
+npm install && npx prisma generate
 
 # Wrangler login
 if ! npx wrangler whoami 2>/dev/null | grep -q "You are logged in"; then
