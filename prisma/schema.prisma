@@ -1,7 +1,12 @@
 generator client {
   provider        = "prisma-client-js"
-  output = "../generated/prisma"
+  output          = "../src/generated/prisma"
   previewFeatures = ["driverAdapters"]
+}
+
+generator zod {
+  provider = "zod-prisma-types"
+  output   = "../src/generated/zod"
 }
 
 datasource db {
@@ -19,7 +24,7 @@ model TestCase {
 
 model Kata {
   id          Int        @id @default(autoincrement())
-  date        DateTime?
+  date        DateTime   @unique
   starterCode String
   testCases   TestCase[]
   description String?
@@ -28,8 +33,8 @@ model Kata {
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
-  email String @unique
-  name String?
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
   katas Kata[]
 }
