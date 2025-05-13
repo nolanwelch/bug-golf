@@ -1,40 +1,53 @@
 generator client {
-  provider        = "prisma-client-js"
-  output          = "../src/generated/prisma"
-  previewFeatures = ["driverAdapters"]
+    provider        = "prisma-client-js"
+    output          = "../src/generated/prisma"
+    previewFeatures = ["driverAdapters"]
 }
 
 generator zod {
-  provider = "zod-prisma-types"
-  output   = "../src/generated/zod"
+    provider = "zod-prisma-types"
+    output   = "../src/generated/zod"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
 }
 
 model TestCase {
-  id       Int  @id @default(autoincrement())
-  args     Json
-  expected Json
-  kata     Kata @relation(fields: [kataId], references: [id])
-  kataId   Int
+    id       Int    @id @default(autoincrement())
+    args     String
+    expected String
+    kata     Kata   @relation(fields: [kataId], references: [id])
+    kataId   Int
 }
 
 model Kata {
-  id          Int        @id @default(autoincrement())
-  date        DateTime   @unique
-  starterCode String
-  testCases   TestCase[]
-  description String?
-  createdBy   User       @relation(fields: [userId], references: [id])
-  userId      Int
+    id          Int          @id @default(autoincrement())
+    date        DateTime     @unique
+    starterCode String
+    testCases   TestCase[]
+    submissions  Submission[]
+    description String?
+    createdBy   User         @relation(fields: [userId], references: [id])
+    userId      Int
+}
+
+model Submission {
+    id        Int    @id @default(autoincrement())
+    code      String
+    // Link to Kata
+    kata      Kata   @relation(fields: [kataId], references: [id])
+    kataId    Int
+    // Link to User
+    createdBy User   @relation(fields: [userId], references: [id])
+    userId    Int
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  katas Kata[]
+    id          Int          @id @default(autoincrement())
+    email       String       @unique
+    name        String?
+    katas       Kata[]
+    submissions Submission[]
 }
