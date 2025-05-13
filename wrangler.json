@@ -1,47 +1,44 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "bug-golf",
-  "account_id": "8bae875f3ce3f27b8a87b1e8f65edebe",
-  "workers_dev": false,
-  "placement": {
-    "mode": "smart"
-  },
-  "route": {
-    "pattern": "buggolf.dev",
-    "custom_domain": true
-  },
-  "main": "./src/worker/index.ts",
-  "compatibility_date": "2025-04-01",
-  "compatibility_flags": ["nodejs_compat"],
-  "observability": {
-    "enabled": true
-  },
-  "upload_source_maps": true,
-  "assets": {
-    "binding": "ASSETS",
-    "not_found_handling": "single-page-application",
-    "directory": "./public"
-  },
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "buggolf-db",
-      "database_id": "2eb992b7-bf45-44c4-91d4-4b62e7c78c9c"
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "name": "bug-golf",
+    "account_id": "8bae875f3ce3f27b8a87b1e8f65edebe",
+    "workers_dev": false,
+    "placement": {
+        "mode": "smart"
+    },
+    "route": {
+        "pattern": "buggolf.dev",
+        "custom_domain": true
+    },
+    "main": "./src/worker/index.ts",
+    "compatibility_date": "2025-04-01",
+    "compatibility_flags": [
+        "nodejs_compat"
+    ],
+    "observability": {
+        "enabled": true
+    },
+    "upload_source_maps": true,
+    "assets": {
+        "binding": "ASSETS",
+        "not_found_handling": "single-page-application",
+        "directory": "./public"
+    },
+    "vars": {
+        "ENVIRONMENT": "production",
+        "CLERK_PUBLISHABLE_KEY": "pk_live_Y2xlcmsuYnVnZ29sZi5kZXYk"
+    },
+    "triggers": {
+        "crons": [
+            "0 0 * * *"
+        ]
+    },
+    "env": {
+        "dev": {
+            "vars": {
+                "ENVIRONMENT": "development",
+                "CLERK_PUBLISHABLE_KEY": "pk_test_dG91Z2gtYnV6emFyZC04Ni5jbGVyay5hY2NvdW50cy5kZXYk"
+            },
+        }
     }
-  ],
-  "vars": {
-    "ENVIRONMENT": "production",
-    "CLERK_PUBLISHABLE_KEY": "pk_live_Y2xlcmsuYnVnZ29sZi5kZXYk"
-  },
-  "triggers": {
-    "crons": ["0 0 * * *"]
-  },
-  "env": {
-    "dev": {
-      "vars": {
-        "ENVIRONMENT": "development",
-        "CLERK_PUBLISHABLE_KEY": "pk_test_dG91Z2gtYnV6emFyZC04Ni5jbGVyay5hY2NvdW50cy5kZXYk"
-      }
-    }
-  }
 }

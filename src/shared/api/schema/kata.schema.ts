@@ -3,7 +3,10 @@ import {
   SubmissionSchema as GeneratedSubmissionSchema,
   TestCaseSchema as GeneratedTestCaseSchema,
 } from "@/generated/zod";
-import { z } from "@hono/zod-openapi";
+import { extendZodWithOpenApi } from "@hono/zod-openapi";
+import { z } from "zod";
+
+extendZodWithOpenApi(z);
 
 // Kata
 export const kataSchema = GeneratedKataSchema.openapi("Kata");

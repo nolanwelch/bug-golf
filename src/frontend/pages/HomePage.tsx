@@ -1,4 +1,8 @@
-import { Kata, kataSchema, TestCaseResult } from "@/shared/schema/kata.schema";
+import {
+  Kata,
+  kataSchema,
+  TestCaseResult,
+} from "@/shared/api/schema/kata.schema";
 import { calculateScore, evaluateCode } from "@/shared/utils/scoring";
 import { distance } from "fastest-levenshtein";
 import { useEffect, useState } from "react";

@@ -1,4 +1,4 @@
-import { TestCaseResult } from "@/shared/schema/kata.schema";
+import { TestCaseResult } from "@/shared/api/schema/kata.schema";
 
 export interface TestCaseErrorsProps {
   failures: Array<TestCaseResult>;

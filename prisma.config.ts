@@ -10,6 +10,7 @@ type Env = {
   CLOUDFLARE_DATABASE_ID: string;
 };
 
+
 export default {
   earlyAccess: true,
   schema: path.join("prisma", "schema.prisma"),
