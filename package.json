@@ -4,7 +4,8 @@
   "version": "0.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && npm run prisma:generate",
+    "prisma:generate": "npx prisma generate",
     "deploy": "npm run build && wrangler deploy",
     "dev": "CLOUDFLARE_ENV=dev vite --host",
     "lint": "eslint --fix \"**/*.{js,jsx,ts,tsx}\" --ignore-pattern \"dist/**\"",
