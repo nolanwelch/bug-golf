@@ -1,4 +1,4 @@
-import { Kata, TestCase } from "@/shared/schema/kata.schema";
+import { Kata, TestCase } from "@/shared/api/schema/kata.schema";
 import { FormEvent, useState } from "react";
 
 export default function NewKataForm() {

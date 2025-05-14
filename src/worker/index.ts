@@ -1,21 +1,8 @@
-import { OpenAPIHono } from "@hono/zod-openapi";
-import { applyMiddleware } from "./middleware";
-import { mountRoutes } from "./routes";
+import api from "@/shared/api";
+import { Hono } from "hono";
 
-// Build API router
-const apiRouter = new OpenAPIHono<{ Bindings: Env }>();
-applyMiddleware(apiRouter);
-mountRoutes(apiRouter);
+const app = new Hono<{ Bindings: Env }>();
 
-// Main app with /api and /doc endpoints
-const app = new OpenAPIHono<{ Bindings: Env }>();
-app.route("/api", apiRouter);
-app.doc("/doc", {
-  openapi: "3.0.0",
-  info: {
-    version: "0.0.0",
-    title: "Bug Golf API",
-  },
-});
+app.route("/api", api);
 
 export default app;

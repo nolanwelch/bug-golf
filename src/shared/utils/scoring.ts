@@ -1,4 +1,4 @@
-import { TestCase, TestCaseResult } from "../schema/kata.schema";
+import { TestCase, TestCaseResult } from "../api/schema/kata.schema";
 
 export function calculateScore(
   keystrokes: number,

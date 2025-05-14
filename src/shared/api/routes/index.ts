@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { katasHandler } from "./katas.handlers.ts";
+import { katasHandler } from "./katas";
 
 /**
  * Registers all API route groups on the provided router.
