@@ -9,7 +9,7 @@ function Instructions() {
           <b>Minimize Keystrokes</b>: Every keypress counts!
         </li>
         <li>
-          <b>Smallest Diff</b>: Only change what’s broken.
+          <b>Smallest Diff</b>: Only change what's broken.
         </li>
         <li>
           <b>Fastest Solution</b>: Beat the clock.
