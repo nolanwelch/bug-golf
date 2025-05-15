@@ -1,4 +1,4 @@
-import { Kata } from "@/shared/schema/kata.schema";
+import { Kata } from "@/shared/api/schema/kata.schema";
 import { Editor } from "@monaco-editor/react";
 import { Dispatch, SetStateAction, useEffect } from "react";
 

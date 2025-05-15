@@ -1,4 +1,4 @@
-import { Kata } from "./schema/kata.schema";
+import { Kata } from "./api/schema/kata.schema";
 
 export const DEV_KATA: Kata = {
   starterCode: `// Write a function that returns the sum of two numbers\nfunction main(a, b) {\n  return a - b;\n}`,
